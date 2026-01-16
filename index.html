@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <title>RESPOND: Priority Facility Characteristics</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name='description' content='RESPOND: Priority Facility Characteristics'>
+
+    <style type="text/css">
+    /* Ensure that the visualization always fills the screen*/
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    .full-screen {
+      height: 100%;
+      margin: 0;
+    }
+    </style>
+
+  </head>
+
+  <body>
+    <!-- full-screen for the viz -->
+    <div class='full-screen d3-chart' id='network-chart'>
+    </div>
+
+    <!-- viz relies on external dependencies jQuery and D3 -->
+    <script type='text/javascript' src='https://d3js.org/d3.v5.min.js'></script>
+
+    <!-- Load data and create viz -->
+    <script type='text/javascript' src='network_data.js'></script>
+    <script type='text/javascript' src='generate_viz.js'></script>
+  </body>
+
+</html>
+
