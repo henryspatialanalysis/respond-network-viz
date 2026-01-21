@@ -74,9 +74,9 @@ tooltip.on('click', function(_){
 
 // Set color scheme
 // Color scheme inspired by Color Brewer: https://colorbrewer2.org/
-const region_names = ['Central', 'Southern'];
-const region_colors = ['#e41a1c', '#377eb8'];
-const col_scale = d3.scaleOrdinal(region_colors).domain(region_names);
+const vir_names = ['Community viraemia >= 1%', 'Community viraemia < 1%'];
+const vir_colors = ['#e41a1c', '#377eb8'];
+const col_scale = d3.scaleOrdinal(vir_colors).domain(vir_names);
 
 // Define the force-directed diagram
 const simulation = d3.forceSimulation(network_data.nodes)
@@ -124,8 +124,8 @@ const node = svg.append("g")
   .data(network_data.nodes)
   .join("circle")
     .attr("stroke", d => d.Region === null ? '#000' : '#AAA')
-    .attr("fill", d => d.Region === null ? '#000' : col_scale(d.Region))
-    .attr("r", d => d.Region === null ? 15 : 5)
+    .attr("fill", d => d.Viraemia === null ? '#000' : col_scale(d.Viraemia))
+    .attr("r", d => d.Region === null ? 10 : 5)
     .call(d3.drag()
       .on("start", dragstarted)
       .on("drag", dragged)
@@ -184,11 +184,11 @@ var legend = viz_guide
   .append('svg:svg')
     .style('margin', 0)
     .style('height', '40px')
-    .style('width', '110px')
+    .style('width', '150px')
     .style('padding', 0);
 
 legend.selectAll('legend_dots')
-  .data(region_names)
+  .data(vir_names)
   .enter()
   .append('circle')
     .attr('cx', 10)
@@ -196,7 +196,7 @@ legend.selectAll('legend_dots')
     .attr('r', 5)
     .style('fill', d => col_scale(d));
 legend.selectAll('legend_labels')
-  .data(region_names)
+  .data(vir_names)
   .enter()
   .append('text')
     .attr('x', 20)
@@ -249,11 +249,11 @@ function add_focus_button(button_title, bg_color, focus_func){
 
 for(const region of Object.keys(district_hierarchy)){
   for(const district of district_hierarchy[region]){
-    add_focus_button(district, col_scale(region), () => focus_grouping(district));
+    add_focus_button(district, '#CCC', () => focus_grouping(district));
   }
 }
 add_focus_button(
   '<i>Clear focus</i>',
-  '#CCC',
+  '#888',
   () => node.transition(transition_time).style('opacity', 1.)
 );
